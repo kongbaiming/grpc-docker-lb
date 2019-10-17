@@ -6,12 +6,13 @@ import helloworld_pb2
 import helloworld_pb2_grpc
 import time
 import logging
+import sys
 
 logger = logging.getLogger(__name__)
 
 
-def run():
-  channel = grpc.insecure_channel('grpc-server:50051')
+def run(grpcserver):
+  channel = grpc.insecure_channel(grpcserver)
   stub = helloworld_pb2_grpc.GreeterStub(channel)
   while True:
     try:
@@ -23,4 +24,4 @@ def run():
       time.sleep(3)
 
 if __name__ == '__main__':
-  run()
+  run(sys.argv[1])
